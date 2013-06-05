@@ -17,6 +17,9 @@ Carlos Vasquez : cgratelli
 David Sanchez : davilo
 
 
+link github repo clonado (profesor aqui el repositorio anterior donde iniciamos el proyecto)
+-----------------------
+https://github.com/cgratelli/devface.git
 
 The Ruby Way! (Fun)
 ===================
