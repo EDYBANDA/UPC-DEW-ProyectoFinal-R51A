@@ -7,6 +7,16 @@ Bitacora: https://docs.google.com/spreadsheet/ccc?key=0AkCIIOnGg4XEdEFtM21kNTU2T
 
 Trello: https://trello.com/board/devface/518e918985037c68200013fc
 
+integrantes:
+------------
+Nombre          ==> gitHub
+Manuel Francia :  mfrancia
+Eddison Banda :   EDYBANDA 
+Diego Seminario : DiegoSec
+Carlos Vasquez : cgratelli
+David Sanchez : davilo
+
+
 
 The Ruby Way! (Fun)
 ===================
