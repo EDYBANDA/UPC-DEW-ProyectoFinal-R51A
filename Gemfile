@@ -22,7 +22,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+gem "client_side_validations", "~> 3.2.5"
+gem 'client_side_validations-simple_form'
 # squeel: https://github.com/ernie/squeel
 # http://www.youtube.com/watch?v=njDJvFaNyzo
 gem 'squeel'
