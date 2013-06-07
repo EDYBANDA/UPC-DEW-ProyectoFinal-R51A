@@ -3,3 +3,9 @@
 
 en:
   hello: "Hello world"
+  helpers:
+    submit:
+#     create: "Registrar %{model}"
+      create: "Registrar"     
+#      update: "Confirmar cambios al %{model} creado"      
+      update: "Actualizar"

@@ -1,7 +1,7 @@
 <%= form_for(@concert) do |f| %>
   <% if @concert.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@concert.errors.count, "error") %> prohibited this concert from being saved:</h2>
+      <h2>Errores al guardar la información:</h2>
 
       <ul>
       <% @concert.errors.full_messages.each do |msg| %>
@@ -12,24 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :start_date %><br />
+    <%= f.label :start_date, "Fecha Inicio" %><br />
     <%= f.datetime_select :start_date %>
   </div>
   <div class="field">
-    <%= f.label :end_date %><br />
+    <%= f.label :end_date, "Fecha Fin" %><br />
     <%= f.datetime_select :end_date %>
   </div>
   <div class="field">
-    <%= f.label :band_id %><br />
-    <%= f.number_field :band_id %>
+    <%= f.label :band_id, "Banda" %><br />
+    <%= f.collection_select :band_id, Band.all, :id, :name, :prompt => true %>
   </div>
   <div class="field">
-    <%= f.label :local_id %><br />
-    <%= f.number_field :local_id %>
+    <%= f.label :local_id, "Local" %><br />
+    <%= f.collection_select :local_id, Local.all, :id, :name, :prompt => true %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -41,6 +41,9 @@ class ConcertsController < ApplicationController
   # POST /concerts.json
   def create
     @concert = Concert.new(params[:concert])
+    @concert.start_date = DateTime.new(params[:concert][:"start_date(1i)"].to_i, params[:concert][:"start_date(2i)"].to_i, params[:concert][:"start_date(3i)"].to_i, params[:concert][:"start_date(4i)"].to_i, params[:concert][:"start_date(5i)"].to_i)
+    @concert.end_date = DateTime.new(params[:concert][:"end_date(1i)"].to_i, params[:concert][:"end_date(2i)"].to_i, params[:concert][:"end_date(3i)"].to_i, params[:concert][:"end_date(4i)"].to_i, params[:concert][:"end_date(5i)"].to_i)#Time.zone.now
+    @concert.user_id = 1 #WARNING: RELACIONAR CON ALUMNO LOGUEADO
 
     respond_to do |format|
       if @concert.save
@@ -79,5 +82,14 @@ class ConcertsController < ApplicationController
       format.html { redirect_to concerts_url }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    @concerts = Concert.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @concerts }
+    end    
   end
 end

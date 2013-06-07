@@ -23,6 +23,10 @@ end
 
 gem 'jquery-rails'
 
+# squeel: https://github.com/ernie/squeel
+# http://www.youtube.com/watch?v=njDJvFaNyzo
+gem 'squeel'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

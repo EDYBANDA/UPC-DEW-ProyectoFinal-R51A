@@ -1,30 +1,30 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>User:</b>
-  <%= @concert.user_id %>
+  <b>Alumno:</b>
+  <%= @concert.user.name %>
 </p>
 
 <p>
-  <b>Start date:</b>
-  <%= @concert.start_date %>
+  <b>Fecha Inicio:</b>
+  <%= @concert.start_date.strftime('%d-%m-%Y %H:%M') %>
 </p>
 
 <p>
-  <b>End date:</b>
-  <%= @concert.end_date %>
+  <b>Fecha Fin:</b>
+  <%= @concert.end_date.strftime('%d-%m-%Y %H:%M') %>
 </p>
 
 <p>
-  <b>Band:</b>
-  <%= @concert.band_id %>
+  <b>Banda:</b>
+  <%= @concert.band.name %>
 </p>
 
 <p>
   <b>Local:</b>
-  <%= @concert.local_id %>
+  <%= @concert.local.name %>
 </p>
 
 
-<%= link_to 'Edit', edit_concert_path(@concert) %> |
-<%= link_to 'Back', concerts_path %>
+<%= link_to 'Editar', edit_concert_path(@concert) %> |
+<%= link_to 'Regresar a listado', concerts_path %>

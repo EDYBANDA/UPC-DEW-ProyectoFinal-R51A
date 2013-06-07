@@ -65,5 +65,9 @@ module Concertsite
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
+
+    #Time Zone: http://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
+    config.time_zone = 'Lima'
+    config.active_record.default_timezone = 'Lima'
   end
 end
