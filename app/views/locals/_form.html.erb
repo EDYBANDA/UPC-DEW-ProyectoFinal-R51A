@@ -62,8 +62,8 @@
     <%= f.text_field :address %>
   </div>
   <div class="field">
-    <%= f.label :distrit %><br />
-    <%= f.text_field :distrit %>
+    <%= f.label :district %><br />    
+    <%= f.collection_select :district_id, District.all, :id, :name, :prompt => true %>
   </div>
   <div class="field">
     <%= f.label :latitud %><br />
