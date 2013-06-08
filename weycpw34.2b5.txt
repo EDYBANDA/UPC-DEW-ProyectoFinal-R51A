@@ -1,0 +1,36 @@
+﻿Revert "Mantenimiento de distrito para los locales"
+
+This reverts commit 0a06820fda37f7e00d6d77beb1692619e8bb7185.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	deleted:    app/assets/javascripts/distritos.js.coffee
+#	deleted:    app/assets/stylesheets/distritos.css.scss
+#	deleted:    app/controllers/distritos_controller.rb
+#	deleted:    app/helpers/distritos_helper.rb
+#	deleted:    app/models/distrito.rb
+#	modified:   app/models/local.rb
+#	deleted:    app/views/distritos/_form.html.erb
+#	deleted:    app/views/distritos/edit.html.erb
+#	deleted:    app/views/distritos/index.html.erb
+#	deleted:    app/views/distritos/new.html.erb
+#	deleted:    app/views/distritos/show.html.erb
+#	modified:   app/views/locals/_form.html.erb
+#	modified:   config/routes.rb
+#	deleted:    db/migrate/20130608184432_create_distritos.rb
+#	deleted:    db/migrate/20130608191141_add_distrito_id_to_local.rb
+#	modified:   db/schema.rb
+#	deleted:    test/fixtures/distritos.yml
+#	deleted:    test/functional/distritos_controller_test.rb
+#	deleted:    test/unit/distrito_test.rb
+#	deleted:    test/unit/helpers/distritos_helper_test.rb
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	app/views/concerts/search.html.erb
+
