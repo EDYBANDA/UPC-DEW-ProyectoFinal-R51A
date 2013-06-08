@@ -3,6 +3,6 @@ class Local < ActiveRecord::Base
   validates_presence_of :name, :district_id, :first_phone, :address 
   validates :name, :uniqueness => true
   
-  belongs_to :district
+  belongs_to :distrito
   has_many :concerts  
 end

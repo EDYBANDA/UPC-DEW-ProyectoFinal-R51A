@@ -1,5 +1,8 @@
 Concertsite::Application.routes.draw do
 
+  resources :distritos
+
+
   root :to => 'home#index'
 
   resources :comments
