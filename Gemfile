@@ -27,6 +27,7 @@ gem 'client_side_validations-simple_form'
 # squeel: https://github.com/ernie/squeel
 # http://www.youtube.com/watch?v=njDJvFaNyzo
 gem 'squeel'
+gem 'jquery-ui-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

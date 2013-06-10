@@ -1,3 +1,13 @@
+<script type="text/javascript">
+
+$(function() {
+  $('.datepicker').datetimepicker({
+    dateFormat: "yy-mm-dd",
+    timeFormat: "hh:mm"
+  });
+});
+</script>
+
 <%= form_for(@concert) do |f| %>
   <% if @concert.errors.any? %>
     <div id="error_explanation">
@@ -13,11 +23,11 @@
 
   <div class="field">
     <%= f.label :start_date, "Fecha Inicio" %><br />
-    <%= f.datetime_select :start_date %>
+    <%= f.text_field :start_date, :class => 'datepicker' %>
   </div>
   <div class="field">
     <%= f.label :end_date, "Fecha Fin" %><br />
-    <%= f.datetime_select :end_date %>
+    <%= f.text_field :end_date, :class => 'datepicker' %>
   </div>
   <div class="field">
     <%= f.label :band_id, "Banda" %><br />

@@ -2,6 +2,15 @@ Concertsite::Application.routes.draw do
 
   root :to => 'home#index'
 
+  match 'auth/:provider/callback', :to => 'sessions#create'
+  match 'auth/failure', :to => redirect('/')
+  match 'signout', :to => 'sessions#destroy', :as => 'signout'
+  match 'sign', :to => 'users#new'
+  match 'control', :to => 'bands#control'
+  match 'band_members/new/:id', :to => 'band_members#new'
+  
+  post 'concerts/search', :to => 'concerts#search'  
+
   resources :comments
   resources :locals
   resources :band_styles
@@ -11,14 +20,6 @@ Concertsite::Application.routes.draw do
   resources :assistances
   resources :user_rols
   resources :users
-
-  match 'auth/:provider/callback', :to => 'sessions#create'
-  match 'auth/failure', :to => redirect('/')
-  match 'signout', :to => 'sessions#destroy', :as => 'signout'
-  match 'sign', :to => 'users#new'
-  match 'control', :to => 'bands#control'
-  match 'band_members/new/:id', :to => 'band_members#new'
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -85,10 +85,19 @@ class ConcertsController < ApplicationController
   end
 
   def search
-    @concerts = Concert.all
+    pdistrict = params[:filters][:district]
+    pband_style = params[:filters][:band_style]
+    pday = params[:filters][:date]
+    pband_name = params[:filters][:band_name]    
+
+    pdistrict = (pdistrict == '' ? nil : pdistrict)
+    pband_style = (pband_style == '' ? nil : pband_style)    
+    pday = (pday == '' ? nil : pday)    
+
+    @concerts = Concert.search_by_filter pdistrict, pband_style, pday, pband_name
+    #@concerts = [ (pdistrict == '' ? 0 : 1 ) ]
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @concerts }
     end    
   end

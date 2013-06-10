@@ -1,4 +1,4 @@
 class BandStyle < ActiveRecord::Base
-  attr_accessible :band_id, :name
+  attr_accessible :name
   has_many :bands
 end

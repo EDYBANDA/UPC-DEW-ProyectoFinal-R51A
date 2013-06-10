@@ -23,7 +23,8 @@ class Concert < ActiveRecord::Base
 
   def validate_availability
   	if local_id
-		concerts = Concert.search_concert(local_id, start_date, end_date)
+		  concerts = Concert.search_concert(id, local_id, start_date, end_date)
+
 		if concerts
 			if concerts.count > 0 
 	  		 errors.add(:local_id, " ya reservado para el rango de fechas ingresadas")
@@ -32,24 +33,59 @@ class Concert < ActiveRecord::Base
 	end
   end
 
-  def self.search_concert(plocal_id, pstart_date, pend_date)
+  def self.search_concert(pid, plocal_id, pstart_date, pend_date)
   		Local.find(plocal_id)
-  			.concerts.where{ 
-  				(
-	  				(start_date.lt(pstart_date) & end_date.gt(pstart_date)) | 
-	  				(start_date.lt(pend_date) & end_date.gt(pend_date)) 
-  				) |
-  				(
-  					start_date.gteq(pstart_date) & end_date.lteq(pend_date)
-  				)  				
+  			.concerts.where{           
+          (
+            id.not_eq(pid)
+          ) &
+          (
+    				(
+  	  				(start_date.lt(pstart_date) & end_date.gt(pstart_date)) | 
+  	  				(start_date.lt(pend_date) & end_date.gt(pend_date)) 
+    				) |
+    				(
+    					start_date.gteq(pstart_date) & end_date.lteq(pend_date)
+    				)
+          )
   			}
   end
-  def self.search_by_filter(pdistrict_id, pband_style_id, day, band_name)
-    concerts = Concert.all
-    if pdistict_id
-      concerts = Concert.joins(:local).where{ {:local => ( id.eq(1) ) } }
+
+  def self.search_by_filter(pdistrict_id, pband_style_id, pday, pband_name)
+    relation_band_to_band_style = "inner join band_styles on bands.band_style_id = band_styles.id"
+    relation_local_to_district = "inner join districts on locals.district_id = districts.id"
+
+    query = "Concerts.id as[concert_id], start_date, end_date, "
+    query += "Bands.name as[band_name], Locals.name as[local_name], "
+    query += "Users.name || ' ' || Users.last_name || ' ' || Users.maternal_name as[user_name], "
+    query += "band_styles.name as[band_style_name], "
+    query += "districts.name as[district_name]"
+
+    concerts = Concert.select{}
+
+    if pdistrict_id
+      concerts = Concert.joins(:local).where{ {:local => (district_id.eq( pdistrict_id ))} }
     end
 
+    if pband_style_id
+      concerts = concerts.joins(:band).where{ {:band => (band_style_id.eq( pband_style_id ))} }
+    end
+
+    if pband_name
+      concerts = concerts.joins(:band).where{ {:band => (name.matches( '%' + pband_name + '%' ))} }
+    end
+
+    if pday
+      concerts = concerts.where{ start_date.lteq(pday) & end_date.gteq(pday) }
+    end
+
+    return concerts
+      .joins(:band)
+      .joins(:local)
+      .joins(:user)
+      .joins(relation_band_to_band_style)
+      .joins(relation_local_to_district)
+      .select{ query }
 
   end  
 end

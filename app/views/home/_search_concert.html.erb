@@ -1,0 +1,54 @@
+<select id="district" name="district">
+	<option selected="selected" value="">[ Todos ]</option>
+	<% @districts.each do |district| %>
+	<option value="<%= district.id %>"><%= district.name %></option>
+	<% end %>
+</select>
+
+<input type="text" id="date" name="date" class="datepicker" />
+
+<select id="band_style" name="band_style">
+	<option selected="selected" value="">[ Todos ]</option>
+	<% @band_styles.each do |band_style| %>
+	<option value="<%= band_style.id %>"><%= band_style.name %></option>
+	<% end %>
+</select>
+
+<input type="text" id="band_name" name="band_name" value="" />
+
+<input id="btnSearch" name="btnSearch" type="button" value="Buscar" class="btn btn-primary btn-large" />
+
+
+<script type="text/javascript">
+
+$(function() {
+  $('.datepicker').datetimepicker({
+  	dateFormat: "yy-mm-dd",
+  	timeFormat: "hh:mm"
+  });
+});
+
+(function () {
+
+	$('#btnSearch').click(function() {
+
+		var pfilters = {
+			district: $('#district').val(),
+			band_style : $('#band_style').val(),
+			date : $('#date').val(),
+			band_name : $('#band_name').val()
+		};
+
+		$.post( 'http://127.0.0.1:3000/concerts/search.json', {  filters : pfilters }, HolaMundoRails, 'json');	
+	});	
+
+})();
+
+
+function HolaMundoRails (data) {
+    $.each( data, function( i, item ) {
+		console.log(item);
+    });
+}
+
+</script>
