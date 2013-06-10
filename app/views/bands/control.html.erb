@@ -1,5 +1,25 @@
 <ul class="breadcrumb">
 	<li><a href="#" class="active"><%= @band.name %></a> <span class="divider">/</span></li>
 	<li><%= link_to 'Editar', edit_band_path(@band) %> <span class="divider">/</span></li>
-	<li><%= link_to 'Añadir Miebros', "band_members/new/#{@band.id}" %></li>
+	<li><%= link_to 'Añadir Miembros', add_members_band_path(@band) %></li>
 </ul>
+<fieldset>
+	<legend>Miembros</legend>
+<table>
+	<tr>
+		<td>Id</td>
+		<td>Nombre</td>
+		<td></td>
+	</tr>
+	  <% @band.users.each do |user| %>
+     <tr>
+     	<td>
+     	  <%= user.id %>	
+     	</td>
+     	<td>
+     	  <%= user.name %>	
+     	</td>
+     </tr>
+  <% end %>
+</table>
+</fieldset>

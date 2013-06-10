@@ -1,0 +1,6 @@
+<h2> Miembros de la Banda <%= @bands.name %> </h2>
+
+<%= simple_form_for(@bands) do |f| %>
+  <%= f.association :users, :as => "check_boxes" %> <br />
+  <%= f.button :submit %>
+<% end %>

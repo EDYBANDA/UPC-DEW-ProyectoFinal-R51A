@@ -1,6 +1,12 @@
 class BandsController < ApplicationController
   # GET /bands
   # GET /bands.json
+  def add_members
+    @bands= Band.find(params[:id])
+  end
+
+  # GET /bands
+  # GET /bands.json
   def index
     @bands = Band.all
     @isbanda = 'active'

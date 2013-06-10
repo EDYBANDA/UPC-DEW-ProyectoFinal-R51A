@@ -15,7 +15,11 @@ Concertsite::Application.routes.draw do
   resources :locals
   resources :band_styles
   resources :band_members
-  resources :bands
+  resources :bands do
+    member do
+      get "add_members"
+    end
+  end
   resources :concerts
   resources :assistances
   resources :user_rols
