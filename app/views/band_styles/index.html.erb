@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Band</th>
     <th>Name</th>
     <th></th>
     <th></th>
@@ -11,7 +10,6 @@
 
 <% @band_styles.each do |band_style| %>
   <tr>
-    <td><%= band_style.id %></td>
     <td><%= band_style.name %></td>
     <td><%= link_to 'Show', band_style %></td>
     <td><%= link_to 'Edit', edit_band_style_path(band_style) %></td>

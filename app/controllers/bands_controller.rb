@@ -1,8 +1,8 @@
-class BandsController < ApplicationController
-  # GET /bands
+class BandsController < ApplicationController 
+# GET /bands
   # GET /bands.json
   def add_members
-    @bands= Band.find(params[:id])
+    @band= Band.find(params[:id])
   end
 
   # GET /bands
@@ -34,8 +34,8 @@ class BandsController < ApplicationController
 
     @validate = Band.where(:user_id => current_user.id).count()
 
-    if @validate > 0 
-      redirect_to :action => 'control' and return
+    if @validate < 0 
+      redirect_to :action => 'index' and return
     end
 
     @band = Band.new

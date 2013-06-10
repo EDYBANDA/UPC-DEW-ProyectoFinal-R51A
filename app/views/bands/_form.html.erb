@@ -18,7 +18,7 @@
   </div>
   <div class="field">
     <%= f.label 'Genero' %><br />
-    <%= f.collection_select :id, BandStyle.all, :id, :name, :prompt => true %>
+    <%= f.collection_select :band_style_id, BandStyle.all, :id, :name, :prompt => true %>
   </div>
   <div class="actions">
     <%= f.submit :class => 'btn btn-primary' %>

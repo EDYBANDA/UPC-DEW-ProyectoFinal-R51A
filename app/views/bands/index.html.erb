@@ -4,16 +4,24 @@
   <thead>
     <tr>
       <th>Nombre</th>
+      <th>Genero</th>
       <th>Participantes</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
-<% @bands.each do |band| %>
+<% @bands.each do |band|
+
+ %>
   <tr>
     <td><%= band.name %></td>
-    <td>
-
-    </td>
+    <td><%= band.band_style.name%></td>
+    <td><%= link_to 'Show', band %></td>
+    <td><%= link_to 'Edit', edit_band_path(band) %></td>
+    <td><%= link_to 'Destroy', band, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
+<%= link_to 'Nueva Banda', new_band_path %>

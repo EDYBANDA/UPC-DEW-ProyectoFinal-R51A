@@ -1,6 +1,34 @@
 <p>
-  <span class="label label-success">Felicitationes</span> Tu banda <b><%= @band.name %></b> fue creada!
+  <span class="label label-success"><%= notice %></span>
 </p>
-
+<p>
+	<h2>
+		Nombre de Banda : <%=@band.name%>
+	</h2>
+	<h5>
+		Genero : <%=@band.band_style.name%>
+	</h5>
+</p>
+<fieldset>
+	<legend>Miembros</legend>
+<table>
+	<tr>
+		<td>Id</td>
+		<td>Nombre</td>
+		<td></td>
+	</tr>
+	  <% @band.users.each do |user| %>
+     <tr>
+     	<td>
+     	  <%= user.id %>	
+     	</td>
+     	<td>
+     	  <%= user.name %>	
+     	</td>
+     </tr>
+  <% end %>
+</table>
+</fieldset>
+<%= link_to 'Añadir Miembros', add_members_band_path(@band), :class => 'btn' %>
 <%= link_to 'Edit', edit_band_path(@band), :class => 'btn' %> 
-
+<%= link_to 'Back', bands_path %>

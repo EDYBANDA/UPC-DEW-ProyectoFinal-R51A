@@ -18,7 +18,7 @@ class BandStylesControllerTest < ActionController::TestCase
 
   test "should create band_style" do
     assert_difference('BandStyle.count') do
-      post :create, band_style: { band_id: @band_style.band_id, name: @band_style.name }
+      post :create, band_style: { name: @band_style.name }
     end
 
     assert_redirected_to band_style_path(assigns(:band_style))
@@ -35,7 +35,7 @@ class BandStylesControllerTest < ActionController::TestCase
   end
 
   test "should update band_style" do
-    put :update, id: @band_style, band_style: { band_id: @band_style.band_id, name: @band_style.name }
+    put :update, id: @band_style, band_style: { name: @band_style.name }
     assert_redirected_to band_style_path(assigns(:band_style))
   end
 

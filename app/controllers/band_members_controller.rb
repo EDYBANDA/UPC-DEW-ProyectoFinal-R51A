@@ -1,3 +1,2 @@
 class BandMembersController < ApplicationController
-
 end

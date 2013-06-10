@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130609001827) do
+ActiveRecord::Schema.define(:version => 20130610180004) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "user_id"
@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(:version => 20130609001827) do
     t.string   "name"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.integer  "user_id"
     t.integer  "band_style_id"
   end
 

@@ -1,13 +1,18 @@
 Concertsite::Application.routes.draw do
 
+  resources :band_members
+
+
+  resources :band_styles
+
+
   root :to => 'home#index'
 
   match 'auth/:provider/callback', :to => 'sessions#create'
   match 'auth/failure', :to => redirect('/')
   match 'signout', :to => 'sessions#destroy', :as => 'signout'
   match 'sign', :to => 'users#new'
-  match 'control', :to => 'bands#control'
-  match 'band_members/new/:id', :to => 'band_members#new'
+
   
   post 'concerts/search', :to => 'concerts#search'  
 
