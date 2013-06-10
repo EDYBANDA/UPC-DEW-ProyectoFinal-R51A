@@ -18,10 +18,10 @@
   <tr>
     <td><%= band.name %></td>
     <td><%= band.band_style.name%></td>
-    <td><%= link_to 'Show', band %></td>
-    <td><%= link_to 'Edit', edit_band_path(band) %></td>
-    <td><%= link_to 'Destroy', band, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Ver', band %></td>
+    <td><%= link_to 'Editar', edit_band_path(band) %></td>
+    <td><%= link_to 'Eliminar', band, confirm: '¿Estas seguro?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
-<%= link_to 'Nueva Banda', new_band_path %>
+<%= link_to 'Nueva Banda', new_band_path, :class => 'btn' %>
