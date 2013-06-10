@@ -10,7 +10,8 @@ class Concert < ActiveRecord::Base
   belongs_to :band
   belongs_to :local
   belongs_to :user
-
+  has_many :comments
+  has_many :bands
   validate :start_date_cannot_be_greater_today, :validate_availability
 
   def start_date_cannot_be_greater_today

@@ -2,11 +2,28 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+	@Comment = Comment.new 
 
+	@concert = Concert.find(params[:id])
+	@comments = Comment.where(:concert_id => @concert.id)
+	@users = User.where(:id => @concert.user_id)
+	@bands = Band.where(:id => @concert.band_id)
+	response = { :concert => @concert, :comment => @comments, :band => @bands, :user => @users }
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @comments }
+      format.json  { render json:response}
+    end
+  end
+  
+  def get_concerts
+	@concert = Concert.find(params[:id], :include => :band)
+	@comment = Comment.where(:concert_id => @concert.id)
+	
+	response = { :concert => @concert, :comment => @comment}
+
+    respond_to do |format|
+      format.html # get_concconcerterts.html.erb
+       format.json  { render json:response}
     end
   end
 
@@ -40,11 +57,18 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+	
     @comment = Comment.new(params[:comment])
+	userid = params[:userid]
+	concertid= params[:concertid]
+	score= params[:score]
+	@comment.user_id=userid
+	@comment.concert_id= concertid
+	@comment.score= score
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to comment_path(@comment), notice: 'Comentario agregado con exito' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }
@@ -80,4 +104,5 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+	
 end
