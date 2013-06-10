@@ -1,29 +1,123 @@
+<%=stylesheet_link_tag  'jquery-ui', 'dialog' %>
+<%= javascript_include_tag 'prototype', 'jquery', 'jquery-ui'%>
+<%= javascript_include_tag 'rails.validations' %>
+
+<script>
+$(document).ready(function(){
+var $dialog = $('#dialogLauncher').dialog({ 
+    autoOpen: false, 
+    title: 'Nuevo Comentario',
+    modal: true,
+    draggable: false
+  });
+  
+
+	$( "#Add").click(function(){
+	if ($('#comment_comment').val()==='' || $('#score').val()==='')
+	  {
+		return false;
+	  }
+	  else
+	  {
+				$dialog.dialog("close"); 
+				$('#msg').show();
+				window.location.reload();
+		}
+			});  
+	$('#open-dialog').click(function(){
+	
+		$dialog.dialog('open');
+		
+	});  
+});
+
+function validateform()
+{
+  if ($('#comment_comment').val()==='' || $('#score').val()==='')
+  {
+	return false;
+  }
+}
+</script>
 <h1>Listing comments</h1>
+<div style="display:none">
+  <span class="label label-success" id="msg">Felicitationes</span> Tu comentario fue creado con exito!
+</div>
+
+<p>
+  <b>Concert:</b>
+  <%= @concert.name %>
+  
+</p>
+
+<p>
+  <b>Bands:</b>
+<% @concert.bands.each do |band| %>
+	<label>
+	  <%= band.name %> 
+	</label>
+<% end %>
+
+</p>
 
 <table>
   <tr>
-    <th>Comment</th>
-    <th>Score</th>
-    <th>Concert</th>
     <th>User</th>
+    <th>Comment</th>
+	<th>Score</th>
     <th></th>
     <th></th>
-    <th></th>
+	<th></th>
+	<th></th>
   </tr>
 
-<% @comments.each do |comment| %>
-  <tr>
-    <td><%= comment.comment %></td>
-    <td><%= comment.score %></td>
-    <td><%= comment.concert_id %></td>
-    <td><%= comment.user_id %></td>
-    <td><%= link_to 'Show', comment %></td>
-    <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-    <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<ul id="container">
+<td>
+<% @concert.comments.each do |comment| %>
+    <li>
+	<% @users.each do |user| %>
+      <%= user.name %> <% end %>comento: <%= comment.comment %> score: <%= comment.score %> puntos
+    </li>
+ 
 <% end %>
-</table>
 
 <br />
+<a id="open-dialog">Nuevo Comentario</a>
 
-<%= link_to 'New Comment', new_comment_path %>
+<div id="dialogLauncher">
+<%= form_for(Comment.new, :remote => true, :validate=>true)  do |f| %>
+ 
+	<% if current_user %>
+	  <div style="display:none">
+		<%= f.label :concert_id %><br />
+		<input type="hidden", name="concertid" value=<%= @concert.id %> />
+	  </div>
+	  <div class="field">
+		<%= f.label :comment %><br />
+		<%= f.text_area :comment, :validate => { :presence => true } %>
+	  </div>
+	  <div class="field">
+		<%= f.label :score %><br />
+		<%=number_field_tag 'score', nil, :in => 1...5, :validate => { :presence => true } %>
+	  </div>
+	  <div style="display:none">
+		<%= f.label :user_id %><br />
+		 <input type="hidden", name="userid" value=<%= current_user.id %> />
+		 
+	  </div>
+	  <div class="actions">
+		<%= submit_tag "Agregar Comentario", :id=> "Add", :class => "btn", :onclick => "return validateform()" %>
+	  </div>
+
+	  <% else %>
+	   <h4>Please sign in first to add a comment</h4>
+	  <% end %>
+	<% end %>
+</div>
+</ul>
+</td>
+</table>
+<br />
+
+
+

@@ -1,0 +1,11 @@
+<%= @get_concerts %>
+
+<%= @concert.name %>
+
+<% @concert.comments.each do |comment| %>
+
+    <li>
+      <%= comment.user_id %> dijo: <%= comment.comment %>
+    </li>
+  
+<% end %>

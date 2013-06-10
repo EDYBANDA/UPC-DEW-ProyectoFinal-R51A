@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_one :user_rols
   has_many :band_members
+  has_many :comments
   has_many :bands, :through => :band_members
   #validates_presence_of :document_number
 
