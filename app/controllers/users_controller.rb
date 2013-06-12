@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_filter :fill_form
   # GET /users
   # GET /users.json
   def index
@@ -24,12 +25,19 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.json
   def new
-    @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
+    if current_user
+      @user = User.find(current_user.id)
+      redirect_to edit_user_path(@user)
+    else
+      @user = User.new
+        respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @user }
+      end
     end
+    
+
+    
   end
 
   # GET /users/1/edit
@@ -60,7 +68,8 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-
+    params[:user].delete :password_digest_confirmation
+    params[:user].delete :document_number_confirmation
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to @user, notice: 'User was successfully updated.' }

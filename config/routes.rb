@@ -7,9 +7,13 @@ Concertsite::Application.routes.draw do
 
 
   root :to => 'home#index'
+  get "log_in" => "sessions#new", :as => "log_in"
+  get "log_out" => "sessions#destroy", :as => "log_out"
+  match 'auth/:provider/callback', :to => 'sessions#create'
+  match 'auth/failure', :to => redirect('/')
 
   match 'sign' => 'users#new'
-
+  resources :sessions
   
   post 'concerts/search', :to => 'concerts#search'  
 

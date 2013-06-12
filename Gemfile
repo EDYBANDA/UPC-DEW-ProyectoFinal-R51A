@@ -7,7 +7,7 @@ gem 'rails', '3.2.13'
 
 gem 'sqlite3'
 gem 'simple_form'
-gem "koala", "~> 1.6.0"
+gem 'omniauth-facebook'
 gem 'validates_email_format_of'
 
 
