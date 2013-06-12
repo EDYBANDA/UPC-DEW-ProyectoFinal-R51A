@@ -40,11 +40,13 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    params[:user].delete :password_digest_confirmation
+    params[:user].delete :document_number_confirmation
+
     @user = User.new(params[:user])
 
     respond_to do |format|
-      if @user.save
-        UserMailer.registration_confirmation(@user).deliver 
+      if @user.save        
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else

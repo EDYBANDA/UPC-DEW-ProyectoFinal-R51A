@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130610175037) do
+ActiveRecord::Schema.define(:version => 20130612043838) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "user_id"
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(:version => 20130610175037) do
     t.string   "document_type"
     t.string   "document_number"
     t.string   "email"
-    t.string   "password"
+    t.string   "password_digest"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "user_rol_id"
@@ -100,6 +100,8 @@ ActiveRecord::Schema.define(:version => 20130610175037) do
     t.string   "provider"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.string   "password_salt"
+    t.string   "password_hash"
   end
 
 end

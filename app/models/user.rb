@@ -3,16 +3,25 @@ class User < ActiveRecord::Base
   has_many :band_members
   has_many :comments
   has_many :bands, :through => :band_members
-  #validates_presence_of :document_number
 
-  def self.from_omniauth(auth)
-  	where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-  		user.provider = auth.provider
-  		user.uid = auth.uid
-  		user.name = auth.info.name
-  		user.oauth_token = auth.credentials.token
-  		user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-  		user.save!
-  	end
+  attr_accessible :name, :last_name, :maternal_name, :gender, :document_type, :document_number, :email, :password_digest
+
+  before_save :encrypt_password
+
+  validates :name, :presence => true
+  validates :last_name, :presence => true
+  validates :maternal_name, :presence => true
+  validates :gender, :presence => true  
+  validates :document_type, :presence => true  
+  validates :document_number, :confirmation => true, :presence => true, :uniqueness => true
+  validates :email, email_format: { message: "doesn't look like an email address" }, :uniqueness => true
+  validates :password_digest, :confirmation => true, :presence => true
+
+  def encrypt_password
+    if password_digest.present?
+      self.password_salt = BCrypt::Engine.generate_salt
+      self.password_hash = BCrypt::Engine.hash_secret(password_digest, password_salt)
+    end
   end
+
 end
