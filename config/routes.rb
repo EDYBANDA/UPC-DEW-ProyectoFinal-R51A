@@ -30,6 +30,8 @@ Concertsite::Application.routes.draw do
   resources :assistances
   resources :user_rols
   resources :users
+  
+  match 'comments/concerts/:id', :to => 'comments#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
