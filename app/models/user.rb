@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   validates :document_number, :confirmation => true, :presence => true, :uniqueness => true, :unless => :comes_from_facebook?
   validates :email, email_format: { message: "doesn't look like an email address" }, :uniqueness => true, :unless => :comes_from_facebook?
   validates :password_digest, :confirmation => true, :presence => true, :unless => :comes_from_facebook?
+  validates :document_number_confirmation, :presence => true, :unless => :comes_from_facebook?, :on => :create
+  validates :password_digest_confirmation, :presence => true, :unless => :comes_from_facebook?, :on => :create
 
   def encrypt_password
     if password_digest.present?

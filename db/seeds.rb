@@ -6,5 +6,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-users = User.create([{ id: '1', name: 'manuel', last_name: 'francia', maternal_name: 'francia', gender: 'M', document_type: '1', document_number: '222', email: 'mfrancia@ttt.com', password: 'eeeeee' }])
+
+distritos = District.create([{ name: 'Lima' }, { name: 'Callao' }])
 

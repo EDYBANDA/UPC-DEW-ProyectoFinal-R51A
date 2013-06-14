@@ -54,31 +54,31 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :address %><br />
+    <%= f.label :address %>
     <%= f.text_field :address %>
   </div>
   <div class="field">
-    <%= f.label :district %><br />    
+    <%= f.label :district %>    
     <%= f.collection_select :district_id, District.all, :id, :name, :prompt => true %>
   </div>
   <div class="field">
-    <%= f.label :latitud %><br />
+    <%= f.label :latitud %>
     <%= f.text_field :lat ,:readonly => true%>
   </div>
   <div class="field">
-    <%= f.label :longitud %><br />
+    <%= f.label :longitud %>
     <%= f.text_field :lang ,:readonly => true%>
   </div>
    <div id="map-canvas"></div>
   <div class="field">
-    <%= f.label :first_phone %><br />
+    <%= f.label :first_phone %>
     <%= f.text_field :first_phone %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'btn' %>
   </div>
 <% end %>

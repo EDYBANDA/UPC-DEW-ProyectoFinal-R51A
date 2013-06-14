@@ -1,29 +1,32 @@
-<h1>Listado de Conciertos</h1>
+<h3>Listado de Conciertos</h3>
 
-<table>
-  <tr>
-    <th>Alumno</th>
-    <th>Local</th>
-    <th>Banda</th>
-    <th>Fecha Inicio</th>
-    <th>Fecha Fin</th>    
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @concerts.each do |concert| %>
-  <tr>
-    <td><%= concert.user.name %></td>
-    <td><%= concert.local.name %></td>
-    <td><%= concert.band.name %></td>
-    <td><%= concert.start_date.strftime('%d-%m-%Y %H:%M') %></td>
-    <td><%= concert.end_date.strftime('%d-%m-%Y %H:%M') %></td>    
-    <td><%= link_to 'Mostrar', concert %></td>
-    <td><%= link_to 'Editar', edit_concert_path(concert) %></td>
-    <td><%= link_to 'Eliminar', concert, method: :delete, data: { confirm: '¿Desea eliminar el concierto?' } %></td>
-  </tr>
-<% end %>
+<table class="table">
+  <thead>
+      <tr>
+        <th>Alumno</th>
+        <th>Local</th>
+        <th>Banda</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>    
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+  </thead>
+  <tbody>
+      <% @concerts.each do |concert| %>
+      <tr>
+        <td><%= concert.user.name %></td>
+        <td><%= concert.local.name %></td>
+        <td><%= concert.band.name %></td>
+        <td><%= concert.start_date.strftime('%d-%m-%Y %H:%M') %></td>
+        <td><%= concert.end_date.strftime('%d-%m-%Y %H:%M') %></td>    
+        <td><%= link_to 'Mostrar', concert %></td>
+        <td><%= link_to 'Editar', edit_concert_path(concert) %></td>
+        <td><%= link_to 'Eliminar', concert, method: :delete, data: { confirm: '¿Desea eliminar el concierto?' } %></td>
+      </tr>
+      <% end %>
+  </tbody>
 </table>
 
 <br />

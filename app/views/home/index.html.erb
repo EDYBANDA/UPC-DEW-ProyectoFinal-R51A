@@ -1,9 +1,12 @@
 <div class="hero-unit">
-	<h1>DevFace</h1>
-	<p>Ven y Disfruta de todos los conciertos organizado por la UPC</p>
-	<p>
+	<% if current_user %>
+	<% else %>
+		<h1>DevFace</h1>
+		<p>Ven y Disfruta de todos los conciertos organizado por la UPC</p>
+		<p>
 			<%= link_to 'Registrate', new_user_path, :class => 'btn btn-primary btn-large' %>
-	</p>
+		</p>
+	<% end %>
 
 	<p>
 		<%= render 'search_concert' %>

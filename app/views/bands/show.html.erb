@@ -2,33 +2,36 @@
   <span class="label label-success"><%= notice %></span>
 </p>
 <p>
-	<h2>
-		Nombre de Banda : <%=@band.name%>
-	</h2>
-	<h5>
-		Genero : <%=@band.band_style.name%>
-	</h5>
+	<h3>Nombre de Banda: <%= @band.name %></h3>
+	<span class="label label-info">Genero</span> <%=@band.band_style.name%>
 </p>
-<fieldset>
-	<legend>Miembros</legend>
-<table>
-	<tr>
-		<td>Id</td>
-		<td>Nombre</td>
-		<td></td>
-	</tr>
-	  <% @band.users.each do |user| %>
-     <tr>
-     	<td>
-     	  <%= user.id %>	
-     	</td>
-     	<td>
-     	  <%= user.name %>	
-     	</td>
-     </tr>
-  <% end %>
+
+<h4>Miembros</h4>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @band.users.each do |user| %>
+		 <tr>
+		 	<td>
+		 	  <%= user.id %>	
+		 	</td>
+		 	<td>
+		 	  <%= user.name %>	
+		 	</td>
+		 	<td></td>
+		 </tr>
+		<% end %>
+	</tbody>
 </table>
-</fieldset>
+
+<% if @band.user_id == current_user.id %>
 <%= link_to 'Añadir Miembros', add_members_band_path(@band), :class => 'btn' %>
 <%= link_to 'Edit', edit_band_path(@band), :class => 'btn' %> 
+<% end %>
 <%= link_to 'Back', bands_path, :class => 'btn'%>

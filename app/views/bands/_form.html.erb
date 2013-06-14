@@ -17,7 +17,7 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label 'Genero' %><br />
+    <%= f.label 'Genero' %>
     <%= f.collection_select :band_style_id, BandStyle.all, :id, :name, :prompt => true %>
   </div>
   <div class="actions">
