@@ -44,7 +44,12 @@
 								</li>
 								<% if current_user.document_type == 'TIU' %>
 								<li class="<%= @isnewbanda ? @isnewbanda : '' %>">
-									<%= link_to 'Mi Banda', new_band_path, :tabindex => "-1" %>
+									<%= link_to 'Mis Bandas', new_band_path, :tabindex => "-1" %>
+								</li>
+								<% end %>
+								<% if current_user.user_rol_id == 1 %>
+								<li class="<%= @islocal ? @islocal : '' %>">
+									<%= link_to 'Agregar Estilos de Musica', new_band_style_path, :tabindex => "-1" %>
 								</li>
 								<% end %>
 							</ul>
