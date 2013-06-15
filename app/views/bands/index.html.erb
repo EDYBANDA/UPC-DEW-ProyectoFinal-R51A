@@ -31,3 +31,8 @@
   </tr>
 <% end %>
 </table>
+<% 
+  if !current_user.nil? %>
+<%= link_to 'Nueva Banda', new_band_path, :class => 'btn' %>
+<%  
+  end%>
