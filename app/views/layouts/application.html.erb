@@ -29,9 +29,6 @@
 				<div class="nav-collapse collapse">
 					<!-- .nav, .navbar-search, .navbar-form, etc -->
 					<ul class="nav">
-						<li class="<%= @ishome ? @ishome : '' %>">
-							<%= link_to 'Inicio', '/', :controller => 'home' %>
-						</li>						
 						<% if current_user %>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -40,18 +37,11 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li class="<%= @isbanda ? @isbanda : '' %>">
-									<%= link_to 'Buscar Bandas', bands_path, :tabindex => "-1" %>
+									<%= link_to 'Busca Bandas', bands_path, :tabindex => "-1" %>
 								</li>
-								<% if current_user.document_type == 'TIU' %>
 								<li class="<%= @isnewbanda ? @isnewbanda : '' %>">
-									<%= link_to 'Mis Bandas', new_band_path, :tabindex => "-1" %>
+									<%= link_to 'Mi Banda', new_band_path, :tabindex => "-1" %>
 								</li>
-								<% end %>
-								<% if current_user.user_rol_id == 1 %>
-								<li class="<%= @islocal ? @islocal : '' %>">
-									<%= link_to 'Agregar Estilos de Musica', new_band_style_path, :tabindex => "-1" %>
-								</li>
-								<% end %>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -60,11 +50,9 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-							    <% if current_user.user_rol_id == 1 %>
 								<li class="<%= @islocal ? @islocal : '' %>">
 									<%= link_to 'Agregar Locales', new_local_path, :tabindex => "-1" %>
 								</li>
-								<% end %>
 								<li class="<%= @islistlocal ? @islistlocal : '' %>">
 									<%= link_to 'Mostrar Locales', locals_path, :tabindex => "-1" %>
 								</li>
@@ -76,11 +64,9 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<% if current_user.document_type == 'TIU' %>
 								<li class="<%= @islocal ? @islocal : '' %>">
 									<%= link_to 'Agregar concierto', new_concert_path, :tabindex => "-1" %>
 								</li>
-								<% end %>
 								<li class="<%= @islistlocal ? @islistlocal : '' %>">
 									<%= link_to 'Mostrar Conciertos', concerts_path, :tabindex => "-1" %>
 								</li>
@@ -94,8 +80,8 @@
 					</ul>
 					<ul class="nav pull-right">						
 						<% if current_user %>
-						<li class="<%= @isUserEdit ? @isUserEdit : '' %>">
-							<%= link_to raw("Bienvenido: <strong>#{current_user.name}</strong>!"), edit_user_path(current_user), id: "sign_in" %>							
+						<li>
+							<a href="">Bienvenido: <strong><%= current_user.name %></strong>!</a>
 						</li>
 						<li>
 							<%= link_to "Sign out", '/log_out', id: "sign_out" %>
@@ -116,7 +102,7 @@
 							</ul>
 						</li>
 						<li>
-							<%= link_to "Ingresar", "/log_in", id: "sign_in" %>
+							<%= link_to "Ingresar", "/sign", id: "sign_in" %>
 						</li>
 						<!-- <li>
 							<%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>

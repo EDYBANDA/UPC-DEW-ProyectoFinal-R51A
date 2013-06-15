@@ -41,9 +41,9 @@ class ConcertsController < ApplicationController
   # POST /concerts.json
   def create
     @concert = Concert.new(params[:concert])
-    @concert.start_date = DateTime.new(params[:concert][:"start_date(1i)"].to_i, params[:concert][:"start_date(2i)"].to_i, params[:concert][:"start_date(3i)"].to_i, params[:concert][:"start_date(4i)"].to_i, params[:concert][:"start_date(5i)"].to_i)
-    @concert.end_date = DateTime.new(params[:concert][:"end_date(1i)"].to_i, params[:concert][:"end_date(2i)"].to_i, params[:concert][:"end_date(3i)"].to_i, params[:concert][:"end_date(4i)"].to_i, params[:concert][:"end_date(5i)"].to_i)#Time.zone.now
-    @concert.user_id = 1 #WARNING: RELACIONAR CON ALUMNO LOGUEADO
+    #@concert.start_date = DateTime.new(params[:concert][:"start_date(1i)"].to_i, params[:concert][:"start_date(2i)"].to_i, params[:concert][:"start_date(3i)"].to_i, params[:concert][:"start_date(4i)"].to_i, params[:concert][:"start_date(5i)"].to_i)
+    #@concert.end_date = DateTime.new(params[:concert][:"end_date(1i)"].to_i, params[:concert][:"end_date(2i)"].to_i, params[:concert][:"end_date(3i)"].to_i, params[:concert][:"end_date(4i)"].to_i, params[:concert][:"end_date(5i)"].to_i)#Time.zone.now
+    @concert.user_id = 1
 
     respond_to do |format|
       if @concert.save

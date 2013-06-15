@@ -32,17 +32,11 @@ class BandsController < ApplicationController
   # GET /bands/new.json
   def new
 
-    @validate = Band.find_by_user_id(current_user.id)
-
-    if @validate
-      redirect_to @validate
-    else
       @band = Band.new
-
+      @validate = Band.find_by_user_id(current_user.id)
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @band }
-      end
     end
   end
 

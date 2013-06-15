@@ -1,32 +1,31 @@
-<select id="district" name="district">
-	<option selected="selected" value="">[ Todos ]</option>
-	<% @districts.each do |district| %>
-	<option value="<%= district.id %>"><%= district.name %></option>
-	<% end %>
-</select>
-
-<input type="text" id="date" name="date" class="datepicker" />
-
-<select id="band_style" name="band_style">
-	<option selected="selected" value="">[ Todos ]</option>
-	<% @band_styles.each do |band_style| %>
-	<option value="<%= band_style.id %>"><%= band_style.name %></option>
-	<% end %>
-</select>
-
-<input type="text" id="band_name" name="band_name" value="" />
-
-<input id="btnSearch" name="btnSearch" type="button" value="Buscar" class="btn btn-primary btn-large" />
-
+<form class="form-inline">
+	 <div class="control-group">
+    <label class="control-label" for="district">Distrito</label>
+	  <select id="district" name="district">
+		<option selected="selected" value="">[ Todos ]</option>
+		<% @districts.each do |district| %>
+		<option value="<%= district.id %>"><%= district.name %></option>
+		<% end %>
+	  </select>
+    	<label class="control-label" for="date">Fecha</label>
+		<input type="text" id="date" name="date" class="datepicker" />
+	 </div>		
+	 <div class="control-group">
+    <label class="control-label" for="band_style">Estilo Banda</label>
+	<select id="band_style" name="band_style">
+		<option selected="selected" value="">[ Todos ]</option>
+		<% @band_styles.each do |band_style| %>
+		<option value="<%= band_style.id %>"><%= band_style.name %></option>
+		<% end %>
+	</select>
+    <label class="control-label" for="band_name">Banda</label>	
+	<input type="text" id="band_name" name="band_name" value="" />
+	<input id="btnSearch" name="btnSearch" type="button" value="Buscar" class="btn" />    
+	 </div>
+</form>
 
 <script type="text/javascript">
-
-$(function() {
-  $('.datepicker').datetimepicker({
-  	dateFormat: "yy-mm-dd",
-  	timeFormat: "hh:mm"
-  });
-});
+$(function() { $('.datepicker').datetimepicker({ dateFormat: "yy-mm-dd", timeFormat: "hh:mm" }); });
 
 (function () {
 
@@ -39,16 +38,99 @@ $(function() {
 			band_name : $('#band_name').val()
 		};
 
-		$.post( 'http://127.0.0.1:3000/concerts/search.json', {  filters : pfilters }, HolaMundoRails, 'json');	
+		$.post( 'http://localhost:3000/concerts/search.json', {  filters : pfilters }, HolaMundoRails, 'json');	
 	});	
 
 })();
 
 
 function HolaMundoRails (data) {
-    $.each( data, function( i, item ) {
-		console.log(item);
+    listadoFinal = new Array();
+    $.each( data, function( i, item ) {        
+        listadoFinal.push(GetPlantilla(data));
     });
+    
+    $('#listado-concert').empty().append(listadoFinal.join(" "));
+}
+
+function DateFmt() {
+    this.dateMarkers = { 
+     d:['getDate',function(v) { return ("0"+v).substr(-2,2)}], 
+           m:['getMonth',function(v) { return ("0"+v).substr(-2,2)}],
+           n:['getMonth',function(v) {
+               var mthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+               return mthNames[v];
+             }],
+           w:['getDay',function(v) {
+               var dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+               return dayNames[v];
+             }],
+           y:['getFullYear'],
+           H:['getHours',function(v) { return ("0"+v).substr(-2,2)}],
+           M:['getMinutes',function(v) { return ("0"+v).substr(-2,2)}],
+           S:['getSeconds',function(v) { return ("0"+v).substr(-2,2)}],
+           i:['toISOString',null]
+    };
+
+    this.format = function(date, fmt) {
+      var dateMarkers = this.dateMarkers
+      var dateTxt = fmt.replace(/%(.)/g, function(m, p){
+      var rv = date[(dateMarkers[p])[0]]()
+
+      if ( dateMarkers[p][1] != null ) rv = dateMarkers[p][1](rv)
+
+      return rv
+    });
+
+    return dateTxt
+    }
+  }
+
+function GetPlantilla(concert){
+  concert = concert[0];
+fmt = new DateFmt();
+  plantilla = '<div class="span4">';
+      plantilla += '<h4>' + fmt.format(new Date(concert.start_date),"%d-%n-%y %H:%M") + ' - ' + 
+      	fmt.format(new Date(concert.end_date),"%d-%n-%y %H:%M") +'</h4>';
+       plantilla += '<p class="artists summary">';
+        plantilla += '<a href="http://localhost:3000/comments/concerts/'+ concert.concert_id +'">';
+            plantilla += '<strong>'+ concert.band_name + '</strong>';
+            plantilla += concert.user_name;
+		plantilla += '</a>';
+		plantilla += '</p>';
+		plantilla += '<p class="location vcard">';
+            plantilla += '<span class="fn org">';
+                plantilla += '<strong>' + concert.local_name +'</strong>';
+            plantilla += '</span>';
+            plantilla += '<span class="locality">' + concert.district_name + '</span>';
+        plantilla += '</p>';
+      plantilla += '<p><a class="btn" href="http://localhost:3000/comments/concerts/'+ concert.concert_id +'">Ver Detalle »</a></p>';
+    plantilla += '</div>';
+    
+    return plantilla;
 }
 
 </script>
+
+<DIV id="listado-concert">
+<% @concerts.each do |concert| %>
+
+	<div class="span4">
+      <h4><%= concert.start_date.strftime('%d-%m-%Y %H:%M') %> - <%= concert.end_date.strftime('%d-%m-%Y %H:%M') %></h4>
+       <p class="artists summary">
+        <a href="http://localhost:3000/comments/concerts/<%= concert.concert_id %>">
+            <strong> <%= concert.band_name %> </strong>
+            <%= concert.user_name %>
+		</a>
+		</p>
+		<p class="location vcard">
+            <span class="fn org">
+                <strong><%= concert.local_name %></strong>
+            </span>
+            <span class="locality"><%= concert.district_name %></span>
+        </p>
+      <p><a class="btn" href="http://localhost:3000/comments/concerts/<%= concert.concert_id %>">Ver Detalle »</a></p>
+    </div>
+
+<% end %>
+</DIV>
