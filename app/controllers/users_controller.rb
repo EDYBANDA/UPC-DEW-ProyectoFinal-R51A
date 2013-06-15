@@ -49,8 +49,6 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    params[:user].delete :password_digest_confirmation
-    params[:user].delete :document_number_confirmation
 
     @user = User.new(params[:user])
 

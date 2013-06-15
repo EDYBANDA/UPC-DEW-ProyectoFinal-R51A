@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :bands, :through => :band_members
 
-  attr_accessible :name, :last_name, :maternal_name, :gender, :document_type, :document_number, :email, :password_digest
+  attr_accessible :name, :last_name, :maternal_name, :gender, :document_type, :document_number, :email, :password_digest, :document_number_confirmation, :password_digest_confirmation
 
   before_save :encrypt_password
 
@@ -55,5 +55,4 @@ class User < ActiveRecord::Base
       end 
     end
   end
-
 end

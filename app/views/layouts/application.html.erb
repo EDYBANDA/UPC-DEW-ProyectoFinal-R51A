@@ -55,9 +55,11 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
+							    <% if current_user.user_rol_id == 1 %>
 								<li class="<%= @islocal ? @islocal : '' %>">
 									<%= link_to 'Agregar Locales', new_local_path, :tabindex => "-1" %>
 								</li>
+								<% end %>
 								<li class="<%= @islistlocal ? @islistlocal : '' %>">
 									<%= link_to 'Mostrar Locales', locals_path, :tabindex => "-1" %>
 								</li>
@@ -69,9 +71,11 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
+								<% if current_user.document_type == 'TIU' %>
 								<li class="<%= @islocal ? @islocal : '' %>">
 									<%= link_to 'Agregar concierto', new_concert_path, :tabindex => "-1" %>
 								</li>
+								<% end %>
 								<li class="<%= @islistlocal ? @islistlocal : '' %>">
 									<%= link_to 'Mostrar Conciertos', concerts_path, :tabindex => "-1" %>
 								</li>

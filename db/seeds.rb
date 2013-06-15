@@ -8,4 +8,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 distritos = District.create([{ name: 'Lima' }, { name: 'Callao' }])
+estilos = BandStyle.create([{ name: 'Rock' }, { name: 'Huayno' }, { name: 'Heavy' }])
 
